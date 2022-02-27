@@ -12,31 +12,50 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
-  create_table "document_user", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "file", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", limit: 30, null: false
+    t.binary "file", null: false
+    t.datetime "created_date", default: -> { "current_timestamp()" }, null: false
+  end
+
+  create_table "signature_request", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "subject", limit: 250, null: false
+    t.integer "document_id"
     t.integer "user_id", null: false
-    t.binary "pdf_file", limit: 4294967295
-    t.index ["user_id"], name: "fk_documento_usuario_usuario_idx"
+    t.datetime "created_date", default: -> { "current_timestamp()" }, null: false
+    t.index ["document_id"], name: "signature_request_document_id_fk"
+    t.index ["user_id"], name: "signature_request_user_id_fk"
   end
 
-  create_table "user", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name", limit: 45
-    t.string "addres", limit: 45
-    t.binary "signature", limit: 4294967295
-    t.string "password"
-    t.index ["addres"], name: "correo_UNIQUE", unique: true
+  create_table "signature_request_user", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "request_id", null: false
+    t.integer "user_id", null: false
+    t.integer "signature_id"
+    t.integer "pos_x"
+    t.integer "pos_y"
+    t.boolean "signed", default: false
+    t.datetime "signature_date"
+    t.datetime "created_date", default: -> { "current_timestamp()" }, null: false
+    t.index ["request_id"], name: "signature_request_user_request_id_fk"
+    t.index ["signature_id"], name: "signature_request_user_signature_id_fk"
+    t.index ["user_id"], name: "signature_request_user_user_id_fk"
   end
 
-  create_table "user_request", primary_key: [" user_id", "document_id"], options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.integer " user_id", null: false
-    t.integer "document_id", null: false
-    t.string "state", limit: 45
-    t.date "created_at"
-    t.date "date_signature"
-    t.index [" user_id"], name: "fk_solicitud_usuario_usuario1_idx"
-    t.index ["document_id"], name: "fk_solicitud_usuario_documento_usuario1_idx"
+  create_table "user", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.string "email", limit: 30, null: false
+    t.string "username", limit: 10, null: false
+    t.string "password", limit: 250, null: false
+    t.integer "signature_id"
+    t.datetime "modified_date"
+    t.datetime "created_date", default: -> { "current_timestamp()" }, null: false
+    t.index ["signature_id"], name: "user_signature_id_fk"
   end
 
-  add_foreign_key "document_user", "user", name: "fk_documento_usuario_usuario"
-  add_foreign_key "user_request", "document_user", column: "document_id", name: "fk_solicitud_usuario_documento_usuario1"
-  add_foreign_key "user_request", "user", column: " user_id", name: "fk_solicitud_usuario_usuario1"
+  add_foreign_key "signature_request", "file", column: "document_id", name: "signature_request_document_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "signature_request", "user", name: "signature_request_user_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "signature_request_user", "file", column: "signature_id", name: "signature_request_user_signature_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "signature_request_user", "signature_request", column: "request_id", name: "signature_request_user_request_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "signature_request_user", "user", name: "signature_request_user_user_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user", "file", column: "signature_id", name: "user_signature_id_fk", on_update: :cascade, on_delete: :cascade
 end
