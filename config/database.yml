@@ -6,10 +6,10 @@ default: &default
 
 development:
   <<: *default
-  database: sql3475611
-  host: sql3.freemysqlhosting.net
-  username: sql3475611
-  password: Ld1FUlXC1e
+  database: firma
+  host: 127.0.0.1
+  username: admin
+  password: admin
   port: 3306
 
 # Warning: The database defined as "test" will be erased and
