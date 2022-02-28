@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_02_27_184353) do
 
-  create_table "file", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "signature", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 30, null: false
     t.binary "file", null: false
     t.datetime "created_date", default: -> { "current_timestamp()" }, null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2022_02_27_184353) do
     t.string "name", limit: 50, null: false
     t.string "email", limit: 30, null: false
     t.string "username", limit: 10, null: false
-    t.string "password", limit: 250, null: false
+    t.string "password", limit: 250
     t.integer "signature_id"
     t.datetime "modified_date"
     t.datetime "created_date", default: -> { "current_timestamp()" }, null: false
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2022_02_27_184353) do
     t.index ["signature_id"], name: "user_signature_id_fk"
   end
 
-  add_foreign_key "signature_request", "file", column: "document_id", name: "signature_request_document_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "signature_request", "signature", column: "document_id", name: "signature_request_document_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "signature_request", "user", name: "signature_request_user_id_fk", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "signature_request_user", "file", column: "signature_id", name: "signature_request_user_signature_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "signature_request_user", "signature", name: "signature_request_user_signature_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "signature_request_user", "signature_request", column: "request_id", name: "signature_request_user_request_id_fk", on_update: :cascade, on_delete: :cascade
   add_foreign_key "signature_request_user", "user", name: "signature_request_user_user_id_fk", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "user", "file", column: "signature_id", name: "user_signature_id_fk", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "user", "signature", name: "user_signature_id_fk", on_update: :cascade, on_delete: :cascade
 end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @signature.name %>
+</p>
+
+<p>
+  <strong>File:</strong>
+  <%= @signature.file %>
+</p>
+
+<p>
+  <strong>Created date:</strong>
+  <%= @signature.created_date %>
+</p>
+
+<%= link_to 'Edit', edit_signature_path(@signature) %> |
+<%= link_to 'Back', signatures_path %>
