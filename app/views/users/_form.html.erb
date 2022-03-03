@@ -17,33 +17,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div class="field">
     <%= form.label :signature_id %>
-    <%= form.text_field :signature_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :modified_date %>
-    <%= form.datetime_select :modified_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :created_date %>
-    <%= form.datetime_select :created_date %>
+    <%= form.file_field :signature_id %>
   </div>
 
   <div class="actions">
