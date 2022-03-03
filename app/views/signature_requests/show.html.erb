@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @signature_request.subject %>
+</p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @signature_request.document %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @signature_request.user %>
+</p>
+
+<p>
+  <strong>Created date:</strong>
+  <%= @signature_request.created_date %>
+</p>
+
+<%= link_to 'Edit', edit_signature_request_path(@signature_request) %> |
+<%= link_to 'Back', signature_requests_path %>

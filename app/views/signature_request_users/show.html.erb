@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Request:</strong>
+  <%= @signature_request_user.request %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @signature_request_user.user %>
+</p>
+
+<p>
+  <strong>Pos x:</strong>
+  <%= @signature_request_user.pos_x %>
+</p>
+
+<p>
+  <strong>Pos y:</strong>
+  <%= @signature_request_user.pos_y %>
+</p>
+
+<p>
+  <strong>Num page:</strong>
+  <%= @signature_request_user.num_page %>
+</p>
+
+<p>
+  <strong>Signed:</strong>
+  <%= @signature_request_user.signed %>
+</p>
+
+<p>
+  <strong>Signature date:</strong>
+  <%= @signature_request_user.signature_date %>
+</p>
+
+<p>
+  <strong>Created date:</strong>
+  <%= @signature_request_user.created_date %>
+</p>
+
+<%= link_to 'Edit', edit_signature_request_user_path(@signature_request_user) %> |
+<%= link_to 'Back', signature_request_users_path %>
