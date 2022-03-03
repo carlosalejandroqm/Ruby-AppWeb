@@ -42,9 +42,9 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-         # store uploaded avatar as blob
+         # store uploaded image as blob
         file_read = params[:user][:file_attachment][:file].read
-        @user.file_attachment = FileAttachment.new(name: 'signature', file: file_read)
+        @user.file_attachment = FileAttachment.new(name: 'signature - ' + @user.username, file: file_read)
         @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
@@ -63,11 +63,6 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def show_image
-    @user = User.find(params[:id])
-    send_data @user.file_attachment.file, :type => 'image/png',:disposition => 'inline'
   end
 
   private
