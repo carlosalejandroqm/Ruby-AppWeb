@@ -1,16 +1,22 @@
-<h2>Log in</h2>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  
+  <div class="login-box">
+    <img class="ima" src="img/Logo.jpg" alt="Logo">
+    <h1>Login Here</h1>
+        <!-- Usurio -->  
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <!-- Contraseña -->  
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password" %>
 
+      <input type="submit" value="Log In">
+
+      <a href="#">¿Lost your Pasword?</a><br>
+      <a href="Registro.html">¿Don´t have an account?</a>
+  </div>
+  
   <% if devise_mapping.rememberable? %>
     <div class="field">
       <%= f.check_box :remember_me %>
