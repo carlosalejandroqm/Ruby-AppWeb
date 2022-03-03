@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2022_02_27_184353) do
     t.string "name", limit: 50, null: false
     t.string "email", limit: 30, null: false
     t.string "username", limit: 10, null: false
-    t.string "password", limit: 250, null: false
+    t.string "password", limit: 250
     t.integer "signature_id"
     t.datetime "modified_date"
     t.timestamp "created_date", default: -> { "current_timestamp()" }, null: false

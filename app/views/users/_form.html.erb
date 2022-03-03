@@ -15,11 +15,16 @@
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
+  <% if @user.file_attachment %>
+    <%= ('<img src="data:image/jpg;base64,%s">' % Base64.encode64(@user.file_attachment.file)).html_safe %>
+  <% end %>
 
-  <div class="field">
-    <%= form.label :signature_id %>
-    <%= form.file_field :signature_id %>
-  </div>
+  <%= form.fields_for :file_attachment do |f| %>
+    <div class="field">
+      <%= f.label :file %>
+      <%= f.file_field :file %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

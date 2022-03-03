@@ -7,5 +7,5 @@ class User < ApplicationRecord
   # Model associations
 
 	# Signature - User
-  has_one :file_attachment
+  belongs_to :file_attachment, foreign_key: :signature_id, optional: true
 end

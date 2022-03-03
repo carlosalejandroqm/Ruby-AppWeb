@@ -42,6 +42,10 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+         # store uploaded avatar as blob
+        file_read = params[:user][:file_attachment][:file].read
+        @user.file_attachment = FileAttachment.new(name: 'signature', file: file_read)
+        @user.save
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -61,6 +65,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_image
+    @user = User.find(params[:id])
+    send_data @user.file_attachment.file, :type => 'image/png',:disposition => 'inline'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +78,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :username, :password, :signature_id, :modified_date, :created_date)
+      params.require(:user).permit(:name, :email, :username, :password, :file_attachment, :modified_date, :created_date)
     end
 end
