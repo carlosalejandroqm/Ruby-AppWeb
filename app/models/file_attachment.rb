@@ -3,5 +3,5 @@ class FileAttachment < ApplicationRecord
 	# Model associations
 
 	# Signature - User
-	t.belongs_to :user, optional: true, foreign_key: true
+	has_many :user, foreign_key: :signature_id
 end
