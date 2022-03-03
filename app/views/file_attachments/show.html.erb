@@ -5,10 +5,8 @@
   <%= @file_attachment.name %>
 </p>
 
-<p>
-  <strong>File:</strong>
-  <%= @file_attachment.file %>
-</p>
+<%= content_tag(:iframe, '', src: "data:application/pdf;base64,#{@file_attachment.get_base_64}", 
+                   width: 800, height: 500, frameborder: 0) %>
 
 <p>
   <strong>Created date:</strong>
