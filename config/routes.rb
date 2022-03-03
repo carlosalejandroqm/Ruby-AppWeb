@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :file_attachments
   devise_for :users, :controllers => { registrations: 'users/registrations' }
   resources :users
   resources :profile
