@@ -1,0 +1,37 @@
+<%= form_with(model: signature_request, local: true) do |form| %>
+  <% if signature_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(signature_request.errors.count, "error") %> prohibited this signature_request from being saved:</h2>
+
+      <ul>
+      <% signature_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :subject %>
+    <%= form.text_field :subject %>
+  </div>
+
+  <div class="field">
+    <%= form.label :document_id %>
+    <%= form.text_field :document_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :created_date %>
+    <%= form.datetime_select :created_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

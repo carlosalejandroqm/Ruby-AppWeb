@@ -22,7 +22,7 @@
 
 <p>
   <strong>Signature:</strong>
-  <%= @user.signature %>
+  <%= @user.signature_id %>
 </p>
 
 <p>
@@ -35,5 +35,8 @@
   <%= @user.created_date %>
 </p>
 
+<%= link_to 'Upload document and sign it', users_path %> |
+<%= link_to 'My documents', users_path %>
+<br>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
