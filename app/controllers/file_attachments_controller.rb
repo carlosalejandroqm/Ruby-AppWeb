@@ -24,6 +24,8 @@ class FileAttachmentsController < ApplicationController
     @file_attachment = FileAttachment.new(file_attachment_params)
 
     respond_to do |format|
+      file_read = params[:file_attachment][:file].read
+      @file_attachment.file = file_read
       if @file_attachment.save
         format.html { redirect_to file_attachment_url(@file_attachment), notice: "File attachment was successfully created." }
         format.json { render :show, status: :created, location: @file_attachment }
@@ -38,6 +40,9 @@ class FileAttachmentsController < ApplicationController
   def update
     respond_to do |format|
       if @file_attachment.update(file_attachment_params)
+        file_read = params[:file_attachment][:file].read
+        @file_attachment.file = file_read
+        @file_attachment.save
         format.html { redirect_to file_attachment_url(@file_attachment), notice: "File attachment was successfully updated." }
         format.json { render :show, status: :ok, location: @file_attachment }
       else
