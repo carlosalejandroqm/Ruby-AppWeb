@@ -17,6 +17,8 @@
   </div>
   <% if @user.file_attachment %>
     <%= ('<img src="data:image/jpg;base64,%s">' % Base64.encode64(@user.file_attachment.file)).html_safe %>
+    <p>Is valid?</p>
+    <%= @user.has_valid_signature %>
   <% end %>
 
   <%= form.fields_for :file_attachment do |f| %>

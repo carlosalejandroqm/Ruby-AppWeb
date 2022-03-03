@@ -8,4 +8,8 @@ class User < ApplicationRecord
 
 	# Signature - User
   belongs_to :file_attachment, foreign_key: :signature_id, optional: true
+
+  def has_valid_signature
+		ValidatorService.new(self.file_attachment.file).call if self.file_attachment
+	end
 end
