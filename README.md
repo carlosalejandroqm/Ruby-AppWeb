@@ -152,22 +152,4 @@ let work_team = ['Carlos Alejandro Quiñones Martinez', 'Carlos Felipe Gonzales,
 
 **[Programa de Ingeniería de Sistemas]** de la **[Universidad Francisco de Paula Santander]**
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
